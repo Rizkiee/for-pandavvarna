@@ -93,12 +93,14 @@ ${ch.avatar ? `<img class="avatar" src="${ch.avatar}">` : ""}
 }
 
 /* HOME GRID */
-
 function renderHome(){
 
 const grid=document.getElementById("homeGrid")
 
-const sorted=[...videos].sort((a,b)=>
+const filtered =
+videos.filter(v=>v.duration)
+
+const sorted=[...filtered].sort((a,b)=>
 new Date(b.date) - new Date(a.date)
 )
 
@@ -109,7 +111,6 @@ sorted
 .join("")
 
 }
-
 
 /* CATEGORY ROW */
 
@@ -131,6 +132,20 @@ cats.map(c=>
 
 }
 
+/*UPCCOMING*/
+function renderUpcoming(){
+
+const upcoming = videos.filter(v=>!v.duration)
+
+const grid=document.getElementById("upcomingGrid")
+
+if(!grid) return
+
+grid.innerHTML =
+upcoming.map(card).join("")
+
+}
+
 /*Media*/
 function renderMedia(list=videos){
 
@@ -138,8 +153,12 @@ const grid=document.getElementById("mediaGrid")
 
 if(!grid) return
 
+const sorted=[...list].sort((a,b)=>
+new Date(b.date) - new Date(a.date)
+)
+
 grid.innerHTML =
-list.map(card).join("")
+sorted.map(card).join("")
 
 }
 
@@ -155,23 +174,32 @@ renderMedia(filtered)
 
 
 /* CATEGORY PAGE */
+.categoryRow{
 
-function renderCategoryPage(){
+display:flex;
+gap:20px;
 
-const grid=document.getElementById("categoryGrid")
+overflow-x:auto;
+padding-bottom:10px;
 
-const cats=[...new Set(videos.map(v=>v.type))]
-
-grid.innerHTML=
-
-cats.map(c=>
-
-`<div class="catBox">${c}</div>`
-
-).join("")
+scroll-snap-type:x mandatory;
 
 }
 
+.categoryCard{
+
+min-width:220px;
+
+background:#1a1a1d;
+border-radius:12px;
+
+padding:20px;
+
+flex-shrink:0;
+
+scroll-snap-align:start;
+
+}
 
 /* SIDEBAR */
 document.addEventListener("DOMContentLoaded",()=>{
