@@ -55,6 +55,13 @@ cursor:pointer;
 
 }
 
+.homeIcon{
+
+font-size:22px;
+margin-bottom:10px;
+
+}
+
 
 /* MINI SIDEBAR */
 
@@ -64,6 +71,7 @@ width:60px;
 flex-shrink:0;
 
 padding-top:80px;
+padding-left:10px;
 
 display:flex;
 flex-direction:column;
@@ -71,6 +79,8 @@ align-items:center;
 gap:16px;
 
 border-right:1px solid #1f1f24;
+
+z-index:6;
 
 }
 
@@ -348,6 +358,14 @@ border-radius:10px;
 
 text-align:center;
 
+cursor:pointer;
+
+}
+
+/*grid*/
+.video:hover{
+
+transform:scale(1.03);
 cursor:pointer;
 
 }
