@@ -24,25 +24,75 @@ renderCategoryPage()
 
 loadVideos()
 
+const channels = {
 
-/* VIDEO CARD */
+"Pandavva Official": {
+avatar: "https://unavatar.io/youtube/@PANDAVVA",
+url: "https://youtube.com/@PANDAVVA"
+},
 
-function card(v){
+"Sadewa Sagara": {
+avatar: "https://unavatar.io/youtube/@Sadewa_Sagara",
+url: "https://youtube.com/@sadewa_sagara"
+},
 
-return `
-<div class="video">
+"Nakula Nalendra": {
+avatar: "https://unavatar.io/youtube/@Nakula_Nalendra",
+url: "https://youtube.com/@Nakula_Nalendra"
+},
 
-<img src="${v.thumbnail}">
+"Arjuna Arkana": {
+avatar: "https://unavatar.io/youtube/@Arjuna.Arkana",
+url: "https://youtube.com/@Arjuna.Arkana"
+},
 
-<h3>${v.title}</h3>
+"Bima Bayusena": {
+avatar: "https://unavatar.io/youtube/@BimaBayusena",
+url: "https://youtube.com/@BimaBayusena"
+},
 
-<p>${v.channel}</p>
-
-</div>
-`
+"Yudistira Yogendra": {
+avatar: "https://unavatar.io/youtube/@YudistiraYogendra",
+url: "https://youtube.com/@YudistiraYogendra"
+}
 
 }
 
+/* VIDEO CARD */
+function card(v){
+
+const id = getVideoId(v.link)
+
+const thumb =
+`https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+
+const ch = channels[v.channel] || {}
+
+return `
+
+<div class="video">
+
+<div class="thumb">
+<img loading="lazy" src="${thumb}">
+</div>
+
+<h3>${v.title}</h3>
+
+<p class="channel">
+
+<img class="avatar" src="${ch.avatar}">
+
+<a href="${ch.url}" target="_blank">
+${v.channel}
+</a>
+
+</p>
+
+</div>
+
+`
+
+}
 
 /* HOME GRID */
 
@@ -142,3 +192,17 @@ sidebar.classList.toggle("open")
 }
 
 }
+
+/*thumbnail*/
+function getVideoId(url){
+
+const reg =
+/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/
+
+const match = url.match(reg)
+
+return match ? match[1] : null
+
+}
+
+
