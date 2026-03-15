@@ -61,7 +61,7 @@ url: "https://youtube.com/@YudistiraYogendra"
 /* VIDEO CARD */
 function card(v){
 
-const id = getVideoId(v.link)
+const id = getVideoId(v.url)
 
 const thumb = id
 ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
