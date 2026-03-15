@@ -229,3 +229,23 @@ grid-template-columns:repeat(5,1fr);
 }
 
 }
+
+/*avatar*/
+.channel{
+
+display:flex;
+align-items:center;
+gap:6px;
+
+font-size:12px;
+
+}
+
+.avatar{
+
+width:20px;
+height:20px;
+
+border-radius:50%;
+
+}
