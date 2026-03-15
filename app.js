@@ -63,8 +63,9 @@ function card(v){
 
 const id = getVideoId(v.link)
 
-const thumb =
-`https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+const thumb = id
+? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+: ""
 
 const ch = channels[v.channel] || {}
 
@@ -73,17 +74,17 @@ return `
 <div class="video">
 
 <div class="thumb">
-<img loading="lazy" src="${thumb}">
+${thumb ? `<img loading="lazy" src="${thumb}">` : ""}
 </div>
 
-<h3>${v.title}</h3>
+<h3>${v.title || ""}</h3>
 
 <p class="channel">
 
-<img class="avatar" src="${ch.avatar}">
+${ch.avatar ? `<img class="avatar" src="${ch.avatar}">` : ""}
 
-<a href="${ch.url}" target="_blank">
-${v.channel}
+<a href="${ch.url || "#"}" target="_blank">
+${v.channel || ""}
 </a>
 
 </p>
@@ -195,6 +196,8 @@ sidebar.classList.toggle("open")
 
 /*thumbnail*/
 function getVideoId(url){
+
+if(!url) return null
 
 const reg =
 /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/
