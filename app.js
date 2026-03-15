@@ -208,3 +208,16 @@ return match ? match[1] : null
 
 }
 
+/*home button*/
+const homeBtn = document.querySelector(".homeBtn")
+
+if(homeBtn){
+
+homeBtn.onclick = () => {
+
+window.location.href = "index.html"
+
+}
+
+}
+
