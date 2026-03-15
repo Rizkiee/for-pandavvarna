@@ -64,7 +64,9 @@ const thumb = id
 ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
 : ""
 
-const ch = channels[v.channel] || {}
+const ch =
+Object.entries(channels)
+.find(([name]) => v.channel && v.channel.includes(name))?.[1] || {}
 
 return `
 
@@ -129,14 +131,23 @@ cats.map(c=>
 
 }
 
+/*Media*/
+function renderMedia(list=videos){
+
+const grid=document.getElementById("mediaGrid")
+
+if(!grid) return
+
+grid.innerHTML =
+list.map(card).join("")
+
+}
 
 /* FILTER */
-
 function filterCat(cat){
 
-const filtered=
-
-videos.filter(v=>v.category===cat)
+const filtered =
+videos.filter(v=>v.type===cat)
 
 renderMedia(filtered)
 
