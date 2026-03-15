@@ -200,12 +200,11 @@ function getVideoId(url){
 if(!url) return null
 
 const reg =
-/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/
+/(?:youtube\.com\/(?:watch\?v=|embed\/|live\/|shorts\/)|youtu\.be\/)([^?&]+)/
 
 const match = url.match(reg)
 
 return match ? match[1] : null
 
 }
-
 
