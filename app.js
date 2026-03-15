@@ -14,11 +14,8 @@ renderHome()
 if(document.getElementById("mediaGrid"))
 renderMedia()
 
-if(document.getElementById("categoryRow"))
-renderCategories()
-
-if(document.getElementById("categoryGrid"))
-renderCategoryPage()
+if(window.location.pathname.includes("media.html"))
+renderMedia()
 
 }
 
@@ -166,19 +163,22 @@ cats.map(c=>
 
 
 /* SIDEBAR */
+document.addEventListener("DOMContentLoaded",()=>{
 
 const menuBtn=document.getElementById("menuBtn")
 const sidebar=document.getElementById("sidebar")
 
-if(menuBtn){
+if(menuBtn && sidebar){
 
-menuBtn.onclick=()=>{
+menuBtn.addEventListener("click",()=>{
 
 sidebar.classList.toggle("open")
 
-}
+})
 
 }
+
+})
 
 /*thumbnail*/
 function getVideoId(url){
