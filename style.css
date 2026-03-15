@@ -63,6 +63,15 @@ transform:translateY(-50%);
 z-index:50;
 }
 
+.topbar{
+z-index:100;
+}
+
+.sidebar-mini{
+position:relative;
+z-index:10;
+}
+
 .homeIcon{
 
 font-size:22px;
@@ -75,6 +84,7 @@ margin-bottom:10px;
 .sidebar-mini{
 
 width:70px;
+
 padding-top:80px;
 
 display:flex;
@@ -96,25 +106,19 @@ cursor:pointer;
 
 
 /* FULL SIDEBAR (OVERLAY) */
-
 .sidebar{
-
 position:fixed;
-
-top:0;
 left:-260px;
-
+top:0;
 width:260px;
 height:100%;
-
 background:#1b1b1f;
-
-padding:20px;
-
 transition:0.3s;
+z-index:200;
+}
 
-z-index:20;
-
+.sidebar.open{
+left:0;
 }
 
 .sidebar.open{
