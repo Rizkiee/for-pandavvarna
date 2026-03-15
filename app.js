@@ -71,7 +71,7 @@ const ch = channels[v.channel] || {}
 
 return `
 
-<div class="video">
+<a class="video" href="${v.url}" target="_blank">
 
 <div class="thumb">
 ${thumb ? `<img loading="lazy" src="${thumb}">` : ""}
@@ -83,13 +83,11 @@ ${thumb ? `<img loading="lazy" src="${thumb}">` : ""}
 
 ${ch.avatar ? `<img class="avatar" src="${ch.avatar}">` : ""}
 
-<a href="${ch.url || "#"}" target="_blank">
-${v.channel || ""}
-</a>
+<span>${v.channel || ""}</span>
 
 </p>
 
-</div>
+</a>
 
 `
 
@@ -101,25 +99,13 @@ function renderHome(){
 
 const grid=document.getElementById("homeGrid")
 
-grid.innerHTML=
+const sorted=[...videos].sort((a,b)=>
+new Date(b.date) - new Date(a.date)
+)
 
-videos
+grid.innerHTML=
+sorted
 .slice(0,8)
-.map(card)
-.join("")
-
-}
-
-
-/* MEDIA GRID */
-
-function renderMedia(list=videos){
-
-const grid=document.getElementById("mediaGrid")
-
-grid.innerHTML=
-
-list
 .map(card)
 .join("")
 
@@ -166,7 +152,7 @@ function renderCategoryPage(){
 
 const grid=document.getElementById("categoryGrid")
 
-const cats=[...new Set(videos.map(v=>v.category))]
+const cats=[...new Set(videos.map(v=>v.type))]
 
 grid.innerHTML=
 
