@@ -132,7 +132,7 @@ function renderCategories(){
 
 const row=document.getElementById("categoryRow")
 
-const cats=[...new Set(videos.map(v=>v.category))]
+const cats=[...new Set(videos.map(v=>v.type))]
 
 row.innerHTML=
 
