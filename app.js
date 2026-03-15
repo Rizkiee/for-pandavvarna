@@ -4,19 +4,17 @@ const API =
 let videos=[]
 
 async function loadVideos(){
-
 const res = await fetch(API)
 videos = await res.json()
+
+renderUpcoming()
+renderCategories()
 
 if(document.getElementById("homeGrid"))
 renderHome()
 
 if(document.getElementById("mediaGrid"))
 renderMedia()
-
-if(window.location.pathname.includes("media.html"))
-renderMedia()
-
 }
 
 loadVideos()
@@ -215,8 +213,14 @@ sidebar.classList.toggle("open")
 
 })
 
+document.addEventListener("click",(e)=>{
+if(
+sidebar.classList.contains("open") &&
+!sidebar.contains(e.target) &&
+!menuBtn.contains(e.target)
+){
+sidebar.classList.remove("open")
 }
-
 })
 
 /*thumbnail*/
