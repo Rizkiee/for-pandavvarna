@@ -56,6 +56,14 @@ cursor:pointer;
 
 }
 
+.topbar button{
+position:absolute;
+left:15px;
+top:50%;
+transform:translateY(-50%);
+z-index:50;
+}
+
 .homeIcon{
 
 font-size:22px;
