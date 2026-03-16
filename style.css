@@ -634,6 +634,19 @@ max-width:100%;
 overflow-x:hidden;
 }
 
+@media (max-width:600px){
+
+.layout{
+display:block;
+}
+
+main{
+margin-left:0;
+width:100%;
+}
+
+}
+
 *{
 box-sizing:border-box;
 }
