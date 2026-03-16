@@ -113,20 +113,28 @@ sorted
 /* CATEGORY ROW */
 
 function renderCategories(){
-const row=document.getElementById("categoryRow")
+
+const row = document.getElementById("categoryRow")
 if(!row) return
 
-const cats=[...new Set(videos.map(v=>v.type))]
+const cats = [...new Set(videos.map(v=>v.type))]
 
-row.innerHTML=
+row.innerHTML = cats.map(cat => {
 
-'<button onclick="renderMedia()">All</button>'+
+const count = videos.filter(v=>v.type===cat).length
 
-cats.map(c=>
+return `
+<div class="categoryCard" onclick="filterCat('${cat}')">
 
-`<button onclick="filterCat('${c}')">${c}</button>`
+<div class="catBox">
+<h3>${cat}</h3>
+<p>${count} videos</p>
+</div>
 
-).join("")
+</div>
+`
+
+}).join("")
 
 }
 
