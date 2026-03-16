@@ -501,6 +501,52 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
+@media (max-width:600px){
+
+/* grid jadi 1 kolom */
+.grid{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+/* video card jadi horizontal */
+.video{
+display:flex;
+gap:12px;
+align-items:flex-start;
+background:#1a1a1d;
+padding:8px;
+border-radius:12px;
+}
+
+/* thumbnail kiri */
+.thumb{
+flex:0 0 140px;
+aspect-ratio:16/9;
+}
+
+/* info kanan */
+.video h3{
+font-size:14px;
+padding:0;
+margin:0;
+}
+
+.video .channel{
+padding:4px 0 0 0;
+}
+
+/* thumbnail image */
+.thumb img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:8px;
+}
+
+}
+
 *{
 box-sizing:border-box;
 }
