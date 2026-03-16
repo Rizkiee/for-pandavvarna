@@ -112,7 +112,7 @@ background:#0e0e10;
 }
 
 main{
-margin-left:80px;
+margin-left:70px;
 }
 
 .sidebar-mini img{
@@ -129,21 +129,24 @@ cursor:pointer;
 /* FULL SIDEBAR (OVERLAY) */
 .sidebar{
 position:fixed;
-left:-260px;
 top:0;
+left:0;
 width:260px;
-height:100%;
+height:100vh;
+
 background:#1b1b1f;
-transition:0.3s;
+
+transform:translateX(-100%);
+transition:transform .3s ease;
+
 z-index:200;
+
+padding:20px;
+box-sizing:border-box;
 }
 
 .sidebar.open{
-left:0;
-}
-
-.sidebar.open{
-left:0;
+transform:translateX(0);
 }
 
 
@@ -442,4 +445,48 @@ display:flex;
 gap:10px;
 overflow-x:auto;
 padding:10px 0;
+}
+
+/*SCROLLBAR CATEGORY*/
+.categoryRow::-webkit-scrollbar{
+height:6px;
+}
+
+.categoryRow::-webkit-scrollbar-track{
+background:transparent;
+}
+
+.categoryRow::-webkit-scrollbar-thumb{
+background:#444;
+border-radius:10px;
+}
+
+/*HOME BUTTON*/
+.homeLink{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:20px;
+}
+
+/*RESPONSIVE UKURAN*/
+/*thumbnail*/
+@media(max-width:600px){
+
+.grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+/*mini sidebar*/
+@media(max-width:700px){
+
+.sidebar-mini{
+display:none;
+}
+
+main{
+margin-left:0;
+}
+
 }
