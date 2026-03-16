@@ -468,35 +468,61 @@ margin-bottom:20px;
 }
 
 /*RESPONSIVE UKURAN*/
-/*thumbnail*/
-@media(max-width:600px){
+@media (max-width:600px){
 
-.grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-}
-/*mini sidebar*/
-@media(max-width:700px){
-
+/* sembunyikan mini sidebar */
 .sidebar-mini{
 display:none;
 }
 
-}
-
-@media(max-width:600px){
-
-.sidebar-mini{
-display:none;
-}
-
+/* main full width */
 main{
 margin-left:0;
+padding-left:12px;
+padding-right:12px;
 }
 
+/* grid jadi list */
 .grid{
-grid-template-columns:repeat(2,1fr);
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+/* card horizontal */
+.video{
+display:flex;
+gap:12px;
+align-items:flex-start;
+padding:8px;
+border-radius:12px;
+}
+
+/* thumbnail kiri */
+.thumb{
+flex:0 0 120px;
+aspect-ratio:16/9;
+}
+
+/* thumbnail image */
+.thumb img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:8px;
+}
+
+/* text kanan */
+.video h3{
+margin:0;
+padding:0;
+font-size:14px;
+line-height:1.3;
+}
+
+.video .channel{
+padding:4px 0 0 0;
+font-size:12px;
 }
 
 }
