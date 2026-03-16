@@ -170,35 +170,6 @@ renderMedia(filtered)
 
 }
 
-
-/* CATEGORY PAGE */
-.categoryRow{
-
-display:flex;
-gap:20px;
-
-overflow-x:auto;
-padding-bottom:10px;
-
-scroll-snap-type:x mandatory;
-
-}
-
-.categoryCard{
-
-min-width:220px;
-
-background:#1a1a1d;
-border-radius:12px;
-
-padding:20px;
-
-flex-shrink:0;
-
-scroll-snap-align:start;
-
-}
-
 /* SIDEBAR */
 document.addEventListener("DOMContentLoaded",()=>{
 
