@@ -113,8 +113,8 @@ sorted
 /* CATEGORY ROW */
 
 function renderCategories(){
-
 const row=document.getElementById("categoryRow")
+if(!row) return
 
 const cats=[...new Set(videos.map(v=>v.type))]
 
@@ -202,15 +202,13 @@ scroll-snap-align:start;
 /* SIDEBAR */
 document.addEventListener("DOMContentLoaded",()=>{
 
-const menuBtn=document.getElementById("menuBtn")
-const sidebar=document.getElementById("sidebar")
+const menuBtn = document.getElementById("menuBtn")
+const sidebar = document.getElementById("sidebar")
 
 if(menuBtn && sidebar){
 
 menuBtn.addEventListener("click",()=>{
-
 sidebar.classList.toggle("open")
-
 })
 
 document.addEventListener("click",(e)=>{
@@ -221,6 +219,10 @@ sidebar.classList.contains("open") &&
 ){
 sidebar.classList.remove("open")
 }
+})
+
+}
+
 })
 
 /*thumbnail*/
