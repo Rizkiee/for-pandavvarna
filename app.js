@@ -119,6 +119,17 @@ if(!row) return
 
 const cats = [...new Set(videos.map(v=>v.type))]
 
+if(row.classList.contains("category-scroll")){
+
+row.innerHTML =
+'<button onclick="renderMedia()">All</button>' +
+cats.map(cat =>
+`<button onclick="filterCat('${cat}')">${cat}</button>`
+).join("")
+
+return
+}
+
 row.innerHTML = cats.map(cat => {
 
 const count = videos.filter(v=>v.type===cat).length
