@@ -102,10 +102,6 @@ gap:16px;
 background:#0e0e10;
 }
 
-main{
-margin-left:70px;
-}
-
 .sidebar-mini img{
 
 width:38px;
@@ -199,7 +195,6 @@ margin-bottom:12px;
 
 
 /* VIDEO GRID */
-.grid{
 .grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -488,12 +483,24 @@ grid-template-columns:repeat(2,1fr);
 display:none;
 }
 
+}
+
+@media(max-width:600px){
+
+.sidebar-mini{
+display:none;
+}
+
 main{
 margin-left:0;
 }
 
+.grid{
+grid-template-columns:repeat(2,1fr);
 }
 
-{
+}
+
+*{
 box-sizing:border-box;
 }
