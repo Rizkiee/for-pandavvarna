@@ -153,7 +153,7 @@ row.innerHTML = cats.map(cat => {
 const count = videos.filter(v=>v.type===cat).length
 
 return `
-<div class="categoryCard" onclick="goToCtegory('${cat}')">
+<div class="categoryCard" onclick="goToCategory('${cat}')">
 
 <div class="catBox">
 <h3>${cat}</h3>
