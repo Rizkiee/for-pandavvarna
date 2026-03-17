@@ -4,29 +4,37 @@ const API =
 let videos=[]
 
 async function loadVideos(){
-  const res = await fetch(API)
-  videos = await res.json()
+  try{
+    const res = await fetch(API)
+    const data = await res.json()
 
-  renderUpcoming()
-  renderCategories()
+    console.log("DATA:", data) // ⬅️ DEBUG
 
-  if(document.getElementById("homeGrid"))
-    renderHome()
+    videos = data
 
-  if(document.getElementById("mediaGrid")){
-    const params = new URLSearchParams(window.location.search)
-    const cat = params.get("cat")
+    renderUpcoming()
+    renderCategories()
 
-    if(cat){
-      const filtered = videos.filter(v => v.type === cat)
-      renderMedia(filtered)
-    }else{
-      renderMedia()
+    if(document.getElementById("homeGrid"))
+      renderHome()
+
+    if(document.getElementById("mediaGrid")){
+      const params = new URLSearchParams(window.location.search)
+      const cat = params.get("cat")
+
+      if(cat){
+        const filtered = videos.filter(v => v.type === cat)
+        renderMedia(filtered)
+      }else{
+        renderMedia()
+      }
     }
+
+  }catch(err){
+    console.error("ERROR FETCH:", err)
   }
 }
 
-/* ⬇️ INI WAJIB DI LUAR */
 loadVideos()
 
 const channels = {
