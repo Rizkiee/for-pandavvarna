@@ -35,6 +35,19 @@ async function loadVideos(){
   }
 }
 
+if(document.getElementById("categoryGrid")){
+  const params = new URLSearchParams(window.location.search)
+  const cat = params.get("cat")
+
+  if(cat){
+    const filtered = videos.filter(v => 
+      v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
+    )
+
+    renderCategoryPage(filtered, cat)
+  }
+}
+
 loadVideos()
 
 const channels = {
@@ -168,7 +181,7 @@ return `
 }
 
 function goToCategory(cat){
-  window.location.href = `media.html?cat=${encodeURIComponent(cat)}`
+  window.location.href = `category.html?cat=${encodeURIComponent(cat)}`
 }
 
 /*UPCCOMING*/
@@ -183,6 +196,23 @@ if(!grid) return
 grid.innerHTML =
 upcoming.map(card).join("")
 
+}
+
+function renderCategoryPage(list, cat){
+
+  const grid = document.getElementById("categoryGrid")
+
+  if(!grid) return
+
+  const sorted = [...list].sort((a,b)=>
+    new Date(b.date) - new Date(a.date)
+  )
+
+  grid.innerHTML =
+    `<h2 style="margin-bottom:16px">${cat}</h2>` +
+    `<div class="grid">
+      ${sorted.map(card).join("")}
+    </div>`
 }
 
 /*Media*/
