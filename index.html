@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pandavva Hub</title>
+<title>Pandavva Archive</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="topbar">
 <button id="menuBtn">☰</button>
-<h1 class="homeBtn">PANDAVVA ARCHIVE</h1>
+<h1 class="homeBtn leftTitle">PANDAVVA ARCHIVE</h1>
 </header>
 
 <aside class="sidebar" id="sidebar">
-<a href="index.html">🏠 Home</a>
-<a href="media.html">🌐 All Media</a>
+<a href="index.html" class="homeLink">🏠 Home</a>
+<a href="media.html" class="homeLink">🌐 All Media</a>
 
-<h3>Members</h3>
-<div onclick="goToMember('Pandavva Official')">Pandavva</div>
-<div onclick="goToMember('Nakula Nalendra')">Nakula</div>
-<div onclick="goToMember('Sadewa Sagara')">Sadewa</div>
+<p class="sidebar-title">Members</p>
+<div class="channel" onclick="goToMember('Pandavva Official')">
+<img src="https://unavatar.io/youtube/@PANDAVVA">
+<span>Pandavva</span>
+</div>
+<div class="channel" onclick="goToMember('Nakula Nalendra')">
+<img src="https://unavatar.io/youtube/@Nakula_Nalendra">
+<span>Nakula</span>
+</div>
+<div class="channel" onclick="goToMember('Sadewa Sagara')">
+<img src="https://unavatar.io/youtube/@Sadewa_Sagara">
+<span>Sadewa</span>
+</div>
 
-<h3>Categories</h3>
-<div onclick="goToCategory('Zatsudan')">Zatsudan</div>
-<div onclick="goToCategory('Event')">Event</div>
-<div onclick="goToCategory('Cover')">Cover</div>
+<p class="sidebar-title">Categories</p>
+<div class="channel" onclick="goToCategory('zatsudan')">Zatsudan</div>
+<div class="channel" onclick="goToCategory('event')">Event</div>
+<div class="channel" onclick="goToCategory('cover')">Cover</div>
 </aside>
 
 <main>
+<section class="module">
 <h2>Upcoming</h2>
 <div id="upcomingGrid" class="grid"></div>
+</section>
 
+<section class="module">
 <h2>Latest Videos</h2>
 <div id="homeGrid" class="grid"></div>
-<button onclick="location.href='media.html'">More</button>
+<button class="moreBtn" onclick="location.href='media.html'">More</button>
+</section>
 </main>
+
+<script src="app.js"></script>
+</body>
+</html>
