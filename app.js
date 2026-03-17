@@ -204,11 +204,8 @@ upcoming.map(card).join("")
 function renderCategoryPage(list, cat){
 
   const grid = document.getElementById("categoryGrid")
-  const title = document.getElementById("categoryName")
 
   if(!grid) return
-
-  if(title) title.innerText = cat
 
   const sorted = [...list].sort((a,b)=>
     new Date(b.date) - new Date(a.date)
