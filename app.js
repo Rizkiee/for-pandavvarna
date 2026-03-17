@@ -31,19 +31,22 @@ async function loadVideos(){
       }
     }
 
-    // ✅ PINDAH KE SINI
-    if(document.getElementById("categoryGrid")){
-      const params = new URLSearchParams(window.location.search)
-      const cat = params.get("cat")
+  if(document.getElementById("categoryGrid")){
+  const params = new URLSearchParams(window.location.search)
+  const cat = params.get("cat")
 
-      if(cat){
-        const filtered = videos.filter(v => 
-          v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
-        )
+  if(cat){
 
-        renderCategoryPage(filtered, cat)
-      }
-    }
+    const titleEl = document.getElementById("categoryTitle")
+    if(titleEl) titleEl.innerText = cat
+
+    const filtered = videos.filter(v => 
+      v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
+    )
+
+    renderCategoryPage(filtered, cat)
+  }
+}
 
   }catch(err){
     console.error("ERROR FETCH:", err)
@@ -201,18 +204,17 @@ upcoming.map(card).join("")
 function renderCategoryPage(list, cat){
 
   const grid = document.getElementById("categoryGrid")
+  const title = document.getElementById("categoryName")
 
   if(!grid) return
+
+  if(title) title.innerText = cat
 
   const sorted = [...list].sort((a,b)=>
     new Date(b.date) - new Date(a.date)
   )
 
-  grid.innerHTML =
-    `<h2 style="margin-bottom:16px">${cat}</h2>` +
-    `<div class="grid">
-      ${sorted.map(card).join("")}
-    </div>`
+  grid.innerHTML = sorted.map(card).join("")
 }
 
 /*Media*/
@@ -292,12 +294,6 @@ window.location.href = "index.html"
 
 }
 
-}
-
-/*category section*/
-const titleEl = document.getElementById("categoryTitle")
-if(titleEl && cat){
-  titleEl.innerText = cat
 }
 
 loadVideos()
