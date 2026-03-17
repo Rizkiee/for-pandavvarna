@@ -13,8 +13,16 @@ renderCategories()
 if(document.getElementById("homeGrid"))
 renderHome()
 
-if(document.getElementById("mediaGrid"))
-renderMedia()
+if(document.getElementById("mediaGrid")){
+  const params = new URLSearchParams(window.location.search)
+  const cat = params.get("cat")
+
+  if(cat){
+    const filtered = videos.filter(v => v.type === cat)
+    renderMedia(filtered)
+  }else{
+    renderMedia()
+  }
 }
 
 loadVideos()
@@ -124,7 +132,7 @@ if(row.classList.contains("category-scroll")){
 row.innerHTML =
 '<button onclick="renderMedia()">All</button>' +
 cats.map(cat =>
-`<button onclick="filterCat('${cat}')">${cat}</button>`
+`<button onclick="goToCategory('${cat}')">${cat}</button>`
 ).join("")
 
 return
@@ -147,6 +155,10 @@ return `
 
 }).join("")
 
+}
+
+function goToCategory(cat){
+  window.location.href = `media.html?cat=${encodeURIComponent(cat)}`
 }
 
 /*UPCCOMING*/
