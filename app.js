@@ -9,8 +9,11 @@ async function loadVideos(){
     const data = await res.json()
 
     videos = data
-
+    
+    if(document.getElementById("upcomingGrid"))
     renderUpcoming()
+      
+    if(document.getElementById("categoryRow"))
     renderCategories()
 
     if(document.getElementById("homeGrid"))
