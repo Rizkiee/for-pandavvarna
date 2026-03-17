@@ -15,16 +15,28 @@ handleMemberPage()
 }
 
 function card(v){
+const id = getVideoId(v.url)
+const thumb = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : ""
+
 return `
-<div class="video">
-<img src="https://i.ytimg.com/vi/${getVideoId(v.url)}/hqdefault.jpg">
-<p>${v.title}</p>
-</div>`
+<a class="video" href="${v.url}" target="_blank">
+<div class="thumb">
+${thumb ? `<img src="${thumb}">` : ""}
+</div>
+<h3>${v.title || ""}</h3>
+</a>
+`
 }
 
 function renderHome(){
 const grid = document.getElementById("homeGrid")
-const sorted = [...videos].sort((a,b)=>new Date(b.date)-new Date(a.date))
+
+const filtered = videos.filter(v=>v.duration)
+
+const sorted = [...filtered].sort((a,b)=>
+new Date(b.date) - new Date(a.date)
+)
+
 grid.innerHTML = sorted.slice(0,8).map(card).join("")
 }
 
@@ -37,14 +49,23 @@ grid.innerHTML = upcoming.map(card).join("")
 function renderMedia(list=videos){
 const grid = document.getElementById("mediaGrid")
 if(!grid) return
-const sorted = [...list].sort((a,b)=>new Date(b.date)-new Date(a.date))
+
+const sorted = [...list].sort((a,b)=>
+new Date(b.date) - new Date(a.date)
+)
+
 grid.innerHTML = sorted.map(card).join("")
 }
 
 function renderCategories(){
 const row = document.getElementById("categoryRow")
+if(!row) return
+
 const cats = [...new Set(videos.map(v=>v.type))]
-row.innerHTML = cats.map(c=>`<button onclick="filterCat('${c}')">${c}</button>`).join("")
+
+row.innerHTML =
+'<button onclick="renderMedia()">All</button>' +
+ cats.map(c=>`<button onclick="filterCat('${c}')">${c}</button>`).join("")
 }
 
 function filterCat(cat){
@@ -81,7 +102,7 @@ renderMedia(filtered)
 }
 
 function getVideoId(url){
-const reg = /(?:v=|youtu.be\/)([^&]+)/
+const reg = /(?:youtube\.com\/(?:watch\?v=|live\/)|youtu\.be\/)([^?&]+)/
 const match = url.match(reg)
 return match ? match[1] : ""
 }
