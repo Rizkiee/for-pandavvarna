@@ -294,4 +294,10 @@ window.location.href = "index.html"
 
 }
 
+/*category section*/
+const titleEl = document.getElementById("categoryTitle")
+if(titleEl && cat){
+  titleEl.innerText = cat
+}
+
 loadVideos()
