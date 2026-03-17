@@ -47,6 +47,8 @@ async function loadVideos(){
   }
 }
 
+loadVideos()
+
 const channels = {
 
 "Pandavva Official": {
