@@ -47,8 +47,6 @@ async function loadVideos(){
   }
 }
 
-loadVideos()
-
 const channels = {
 
 "Pandavva Official": {
@@ -293,3 +291,4 @@ window.location.href = "index.html"
 
 }
 
+loadVideos()
