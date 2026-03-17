@@ -8,8 +8,6 @@ async function loadVideos(){
     const res = await fetch(API)
     const data = await res.json()
 
-    console.log("DATA:", data) // ⬅️ DEBUG
-
     videos = data
 
     renderUpcoming()
@@ -30,25 +28,24 @@ async function loadVideos(){
       }
     }
 
+    // ✅ PINDAH KE SINI
+    if(document.getElementById("categoryGrid")){
+      const params = new URLSearchParams(window.location.search)
+      const cat = params.get("cat")
+
+      if(cat){
+        const filtered = videos.filter(v => 
+          v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
+        )
+
+        renderCategoryPage(filtered, cat)
+      }
+    }
+
   }catch(err){
     console.error("ERROR FETCH:", err)
   }
 }
-
-if(document.getElementById("categoryGrid")){
-  const params = new URLSearchParams(window.location.search)
-  const cat = params.get("cat")
-
-  if(cat){
-    const filtered = videos.filter(v => 
-      v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
-    )
-
-    renderCategoryPage(filtered, cat)
-  }
-}
-
-loadVideos()
 
 const channels = {
 
@@ -152,13 +149,13 @@ const cats = [...new Set(videos.map(v=>v.type))]
 
 if(row.classList.contains("category-scroll")){
 
-row.innerHTML =
-'<button onclick="renderMedia()">All</button>' +
-cats.map(cat =>
-`<button onclick="goToCategory('${cat}')">${cat}</button>`
-).join("")
+  row.innerHTML =
+    '<button onclick="renderMedia()">All</button>' +
+    cats.map(cat =>
+      `<button onclick="filterCat('${cat}')">${cat}</button>`
+    ).join("")
 
-return
+  return
 }
 
 row.innerHTML = cats.map(cat => {
