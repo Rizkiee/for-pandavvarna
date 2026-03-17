@@ -1,22 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Category</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+<title>All Media</title>
 
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="media-page">
+  
 <header class="topbar">
-<button id="menuBtn">☰</button>
-<h1 id="categoryTitle" class="leftTitle"></h1>
+  <button id="menuBtn">☰</button>
+  <h1 class="homeBtn leftTitle">ALL MEDIA</h1>
 </header>
 
+<aside class="sidebar-mini">
+
+<a href="index.html" class="homeIcon">🏠</a>
+
+<img src="https://unavatar.io/youtube/@PANDAVVA">
+<img src="https://unavatar.io/youtube/@Sadewa_Sagara">
+<img src="https://unavatar.io/youtube/@Nakula_Nalendra">
+<img src="https://unavatar.io/youtube/@Arjuna.Arkana">
+<img src="https://unavatar.io/youtube/@BimaBayusena">
+<img src="https://unavatar.io/youtube/@YudistiraYogendra">
+
+</aside>
+
+<aside class="sidebar" id="sidebar">
+
+<a href="index.html" class="homeLink">
+<span>🏠</span>
+<span>Home</span>
+</a>
+
+<div class="channel">
+<img src="https://unavatar.io/youtube/@PANDAVVA">
+<span>Pandavva Official</span>
+</div>
+
+<div class="channel">
+<img src="https://unavatar.io/youtube/@Sadewa_Sagara">
+<span>Sadewa Sagara</span>
+</div>
+
+<div class="channel">
+<img src="https://unavatar.io/youtube/@Nakula_Nalendra">
+<span>Nakula Nalendra</span>
+</div>
+
+<div class="channel">
+<img src="https://unavatar.io/youtube/@Arjuna.Arkana">
+<span>Arjuna Arkana</span>
+</div>
+
+<div class="channel">
+<img src="https://unavatar.io/youtube/@BimaBayusena">
+<span>Bima Bayusena</span>
+</div>
+
+<div class="channel">
+<img src="https://unavatar.io/youtube/@YudistiraYogendra">
+<span>Yudistira Yogendra</span>
+</div>
+
+</aside>
+
 <main>
-<div id="categoryGrid" class="grid"></div>
+
+<section class="category-scroll" id="categoryRow"></section>
+
+<section>
+
+<div id="mediaGrid" class="grid"></div>
+
+</section>
+
+<footer class="footer">
+  <p>
+  © Pandavva Archive (Fan Site)<br>
+  All content belongs to Pandavva Official.<br>
+  Thumbnails may belong to fans and original creators (e.g. Twitter).
+  </p>
+</footer>
+  
 </main>
 
 <script src="app.js"></script>
+
 </body>
 </html>
