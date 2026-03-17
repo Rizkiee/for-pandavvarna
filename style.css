@@ -25,8 +25,19 @@ min-height:100vh;
 /* HEADER */
 
 .topbar{
-  justify-content:flex-start; /* tadinya center */
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:60px;
+
+  display:flex; /* INI YANG KURANG */
+  align-items:center;
+  justify-content:flex-start;
+
   padding-left:60px;
+  background:#111;
+  z-index:100;
 }
 
 .leftTitle{
@@ -58,10 +69,6 @@ display:block;
 z-index:200;
 }
 
-.topbar{
-z-index:100;
-}
-
 .sidebar-mini{
 position:relative;
 z-index:10;
@@ -75,22 +82,33 @@ margin-bottom:10px;
 }
 
 .disclaimer{
-  background:#1a1a1d;
+  background:linear-gradient(145deg,#1a1a1d,#202026);
   border:1px solid #2a2a30;
-  padding:12px 14px;
-  border-radius:10px;
+  padding:16px 18px;
+  border-radius:14px;
   font-size:13px;
-  opacity:0.8;
-  margin-bottom:20px;
-  line-height:1.5;
+  line-height:1.6;
+  margin-bottom:24px;
+
+  /* efek card */
+  box-shadow:0 0 0 1px rgba(255,255,255,0.03),
+             0 8px 20px rgba(0,0,0,0.4);
 }
 
 .footer{
   text-align:center;
-  margin-top:40px;
-  padding:20px;
+  margin-top:50px;
+  padding:30px 20px 20px;
   font-size:12px;
   opacity:0.6;
+
+  border-top:1px solid #2a2a30; /* GARIS PEMBATAS */
+}
+
+.footer p{
+  max-width:500px;
+  margin:auto;
+  line-height:1.6;
 }
 
 /* MINI SIDEBAR */
