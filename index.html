@@ -3,123 +3,35 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pandavva Hub</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
-<div class="layout">
-
 <header class="topbar">
-  <button id="menuBtn">☰</button>
-  <h1 class="homeBtn leftTitle">PANDAVVA ARCHIVE</h1>
+<button id="menuBtn">☰</button>
+<h1 class="homeBtn">PANDAVVA ARCHIVE</h1>
 </header>
 
-
-<!-- MINI SIDEBAR -->
-<aside class="sidebar-mini">
-
-<a href="index.html" class="homeIcon">🏠</a>
-
-<img src="https://unavatar.io/youtube/@PANDAVVA">
-<img src="https://unavatar.io/youtube/@Sadewa_Sagara">
-<img src="https://unavatar.io/youtube/@Nakula_Nalendra">
-<img src="https://unavatar.io/youtube/@Arjuna.Arkana">
-<img src="https://unavatar.io/youtube/@BimaBayusena">
-<img src="https://unavatar.io/youtube/@YudistiraYogendra">
-
-</aside>
-
-<!-- FULL SIDEBAR -->
-
 <aside class="sidebar" id="sidebar">
+<a href="index.html">🏠 Home</a>
+<a href="media.html">🌐 All Media</a>
 
-<a href="index.html" class="homeLink">
-<span>🏠</span>
-<span>Home</span>
-</a>
+<h3>Members</h3>
+<div onclick="goToMember('Pandavva Official')">Pandavva</div>
+<div onclick="goToMember('Nakula Nalendra')">Nakula</div>
+<div onclick="goToMember('Sadewa Sagara')">Sadewa</div>
 
-<div class="channel">
-<img src="https://unavatar.io/youtube/@PANDAVVA">
-<span>Pandavva Official</span>
-</div>
-
-<div class="channel">
-<img src="https://unavatar.io/youtube/@Sadewa_Sagara">
-<span>Sadewa Sagara</span>
-</div>
-
-<div class="channel">
-<img src="https://unavatar.io/youtube/@Nakula_Nalendra">
-<span>Nakula Nalendra</span>
-</div>
-
-<div class="channel">
-<img src="https://unavatar.io/youtube/@Arjuna.Arkana">
-<span>Arjuna Arkana</span>
-</div>
-
-<div class="channel">
-<img src="https://unavatar.io/youtube/@BimaBayusena">
-<span>Bima Bayusena</span>
-</div>
-
-<div class="channel">
-<img src="https://unavatar.io/youtube/@YudistiraYogendra">
-<span>Yudistira Yogendra</span>
-</div>
-
+<h3>Categories</h3>
+<div onclick="goToCategory('Zatsudan')">Zatsudan</div>
+<div onclick="goToCategory('Event')">Event</div>
+<div onclick="goToCategory('Cover')">Cover</div>
 </aside>
 
 <main>
-
-<section class="module">
-  <div class="disclaimer">
-    ⚠️ This is a fan-made archive site created to organize Pandavva content.
-    All rights belong to the official Pandavva channels. This site follows their content guidelines.
-  </div>
-</section>
-  
-<section class="module">
-
 <h2>Upcoming</h2>
-
 <div id="upcomingGrid" class="grid"></div>
 
-</section>
-
-<section class="module">
-
-<h2>New</h2>
-
+<h2>Latest Videos</h2>
 <div id="homeGrid" class="grid"></div>
-
-<button class="moreBtn" onclick="location.href='media.html'">
-More
-</button>
-
-</section>
-
-<section class="module">
-<h2>Categories</h2>
-<div id="categoryRow" class="categoryRow"></div>
-</section>
-
-<footer class="footer">
-  <p>
-  © Pandavva Archive (Fan Site)<br>
-  All content belongs to Pandavva Official.<br>
-  Thumbnails may belong to fans and original creators (e.g. Twitter).
-  </p>
-</footer>
-  
+<button onclick="location.href='media.html'">More</button>
 </main>
-
-<script src="app.js"></script>
-
-</div>
-
-</body>
-
-</html>
