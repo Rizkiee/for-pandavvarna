@@ -22,13 +22,14 @@ async function loadVideos(){
     if(document.getElementById("mediaGrid")){
       const params = new URLSearchParams(window.location.search)
       const cat = params.get("cat")
-
+    
       if(cat){
         const filtered = videos.filter(v => v.type === cat)
         renderMedia(filtered)
       }else{
         renderMedia()
       }
+      handleMemberPage()
     }
 
   if(document.getElementById("categoryGrid")){
@@ -215,19 +216,15 @@ function renderCategoryPage(list, cat){
 }
 
 /*Media*/
-function renderMedia(list=videos){
+function renderMedia(list=videos, targetId="mediaGrid"){
+  const grid = document.getElementById(targetId)
+  if(!grid) return
 
-const grid=document.getElementById("mediaGrid")
+  const sorted = [...list].sort((a,b)=>
+    new Date(b.date) - new Date(a.date)
+  )
 
-if(!grid) return
-
-const sorted=[...list].sort((a,b)=>
-new Date(b.date) - new Date(a.date)
-)
-
-grid.innerHTML =
-sorted.map(card).join("")
-
+  grid.innerHTML = sorted.map(card).join("")
 }
 
 /* FILTER */
@@ -295,6 +292,27 @@ window.location.href = "index.html"
 
 function goToMember(name){
   window.location.href = `member.html?member=${encodeURIComponent(name)}`
+}
+
+function handleMemberPage(){
+  const params = new URLSearchParams(window.location.search)
+  const member = params.get("member")
+
+  if(member && document.getElementById("memberGrid")){
+    const filtered = videos.filter(v =>
+      v.channel && v.channel.includes(member)
+    )
+
+    document.getElementById("memberTitle").innerText = member
+
+    const grid = document.getElementById("memberGrid")
+
+    const sorted = [...filtered].sort((a,b)=>
+      new Date(b.date) - new Date(a.date)
+    )
+
+    grid.innerHTML = sorted.map(card).join("")
+  }
 }
 
 loadVideos()
