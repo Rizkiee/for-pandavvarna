@@ -9,6 +9,8 @@ async function loadVideos(){
     const data = await res.json()
 
     videos = data
+    if(document.getElementById("calendarMini"))
+    renderCalendarMini()
     
     if(document.getElementById("upcomingGrid"))
     renderUpcoming()
@@ -340,6 +342,56 @@ function handleMemberPage(){
 
     grid.innerHTML = sorted.map(card).join("")
   }
+}
+
+/*SCHEDULE*/
+function renderCalendarMini(){
+  const container = document.getElementById("calendarMini")
+  if(!container) return
+
+  const scheduled = videos.filter(v => v.schedule_date)
+
+  // group by date
+  const grouped = {}
+
+  scheduled.forEach(v => {
+    if(!grouped[v.schedule_date]){
+      grouped[v.schedule_date] = []
+    }
+    grouped[v.schedule_date].push(v)
+  })
+
+  // urutkan tanggal terdekat
+  const sortedDates = Object.keys(grouped).sort(
+    (a,b) => new Date(a) - new Date(b)
+  )
+
+  container.innerHTML = sortedDates.map(date => {
+    const d = new Date(date)
+    const label = d.toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short"
+    })
+
+    const avatars = grouped[date].map(v => {
+      const ch =
+        Object.entries(channels)
+        .find(([name]) => v.channel && v.channel.includes(name))?.[1] || {}
+
+      return ch.avatar
+        ? `<img src="${ch.avatar}">`
+        : ""
+    }).join("")
+
+    return `
+      <div class="calendar-day">
+        <h4>${label}</h4>
+        <div class="calendar-avatars">
+          ${avatars}
+        </div>
+      </div>
+    `
+  }).join("")
 }
 
 loadVideos()
