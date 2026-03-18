@@ -780,3 +780,37 @@ box-sizing:border-box;
   opacity:.7;
   padding:0 10px 6px;
 }
+
+/*SCHEDULE*/
+.calendar-mini{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  padding-bottom:10px;
+}
+
+.calendar-day{
+  min-width:80px;
+  background:#1a1a1d;
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+}
+
+.calendar-day h4{
+  font-size:13px;
+  margin:0 0 6px;
+  opacity:.8;
+}
+
+.calendar-avatars{
+  display:flex;
+  justify-content:center;
+  gap:4px;
+}
+
+.calendar-avatars img{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+}
