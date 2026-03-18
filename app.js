@@ -90,39 +90,54 @@ url: "https://youtube.com/@YudistiraYogendra"
 
 /* VIDEO CARD */
 function card(v){
+  const id = getVideoId(v.url)
+  const thumb = id
+    ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+    : ""
 
-const id = getVideoId(v.url)
+  const ch =
+    Object.entries(channels)
+    .find(([name]) => v.channel && v.channel.includes(name))?.[1] || {}
 
-const thumb = id
-? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-: ""
+  const scheduleText = formatSchedule(v.schedule_date, v.time)
 
-const ch =
-Object.entries(channels)
-.find(([name]) => v.channel && v.channel.includes(name))?.[1] || {}
+  // 🔴 kalau ada URL → normal video
+  if(v.url){
+    return `
+    <a class="video" href="${v.url}" target="_blank">
+      <div class="thumb">
+        ${thumb ? `<img loading="lazy" src="${thumb}">` : ""}
+      </div>
 
-return `
+      <h3>${v.title || ""}</h3>
 
-<a class="video" href="${v.url}" target="_blank">
+      ${scheduleText ? `<p class="meta">${scheduleText}</p>` : ""}
 
-<div class="thumb">
-${thumb ? `<img loading="lazy" src="${thumb}">` : ""}
-</div>
+      <p class="channel">
+        ${ch.avatar ? `<img class="avatar" src="${ch.avatar}">` : ""}
+        <span>${v.channel || ""}</span>
+      </p>
+    </a>
+    `
+  }
 
-<h3>${v.title || ""}</h3>
+  // 🟡 kalau gak ada URL → card info
+  return `
+  <div class="video">
+    <div class="thumb" style="display:flex;align-items:center;justify-content:center;">
+      <span style="opacity:.6;">UPCOMING</span>
+    </div>
 
-<p class="channel">
+    <h3>${v.title || ""}</h3>
 
-${ch.avatar ? `<img class="avatar" src="${ch.avatar}">` : ""}
+    ${scheduleText ? `<p class="meta">${scheduleText}</p>` : ""}
 
-<span>${v.channel || ""}</span>
-
-</p>
-
-</a>
-
-`
-
+    <p class="channel">
+      ${ch.avatar ? `<img class="avatar" src="${ch.avatar}">` : ""}
+      <span>${v.channel || ""}</span>
+    </p>
+  </div>
+  `
 }
 
 /* HOME GRID */
@@ -188,10 +203,22 @@ function goToCategory(cat){
   window.location.href = `category.html?cat=${encodeURIComponent(cat)}`
 }
 
+/*SCHEDULE*/
+function formatSchedule(date, time){
+  if(!date) return ""
+
+  const d = new Date(date)
+  const options = { day: "numeric", month: "short" }
+  const formattedDate = d.toLocaleDateString("id-ID", options)
+
+  return time 
+    ? `${formattedDate} • ${time}` 
+    : formattedDate
+}
+
 /*UPCCOMING*/
 function renderUpcoming(){
-
-const upcoming = videos.filter(v=>!v.duration)
+  const upcoming = videos.filter(v => v.status === "upcoming")
 
 const grid=document.getElementById("upcomingGrid")
 
