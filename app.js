@@ -293,4 +293,8 @@ window.location.href = "index.html"
 
 }
 
+function goToMember(name){
+  window.location.href = `member.html?member=${encodeURIComponent(name)}`
+}
+
 loadVideos()
