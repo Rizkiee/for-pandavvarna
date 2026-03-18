@@ -814,3 +814,61 @@ box-sizing:border-box;
   height:24px;
   border-radius:50%;
 }
+
+.calendar-wrapper{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.calendar-wrapper button{
+  background:#2a2a30;
+  border:none;
+  color:white;
+  font-size:18px;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.calendar-week{
+  display:flex;
+  gap:10px;
+}
+
+.calendar-day{
+  width:70px;
+  padding:10px;
+  border-radius:12px;
+  background:#1a1a1d;
+  text-align:center;
+  cursor:pointer;
+}
+
+.calendar-day.active{
+  background:#6c5ce7;
+}
+
+.calendar-day h4{
+  margin:0;
+  font-size:12px;
+  opacity:.7;
+}
+
+.calendar-day span{
+  font-size:14px;
+  display:block;
+  margin-top:4px;
+}
+
+.calendar-avatars{
+  display:flex;
+  justify-content:center;
+  margin-top:6px;
+}
+
+.calendar-avatars img{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+}
