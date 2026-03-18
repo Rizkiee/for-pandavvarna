@@ -44,7 +44,7 @@ async function loadVideos(){
     const titleEl = document.getElementById("categoryTitle")
     if(titleEl) titleEl.innerText = cat
 
-    const filtered = videos.filter(v => 
+    const filtered = (v => 
       v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
     )
 
@@ -221,15 +221,14 @@ function formatSchedule(date, time){
 
 /*UPCCOMING*/
 function renderUpcoming(){
-  const upcoming = videos.filter(v => v.status === "upcoming")
+  const upcoming = videos.filter(v => 
+    v.status === "upcoming" && v.url
+  )
 
-const grid=document.getElementById("upcomingGrid")
+  const grid = document.getElementById("upcomingGrid")
+  if(!grid) return
 
-if(!grid) return
-
-grid.innerHTML =
-upcoming.map(card).join("")
-
+  grid.innerHTML = upcoming.map(card).join("")
 }
 
 function renderCategoryPage(list, cat){
