@@ -2,6 +2,7 @@ const API =
 "https://opensheet.elk.sh/16IveyFW68vwyVHRIVH9MU0Jblh6HjUQ3PQU_QiE2C8c/videos"
 
 let videos=[]
+let currentWeekOffset = 0
 
 async function loadVideos(){
   try{
@@ -392,6 +393,51 @@ function renderCalendarMini(){
       </div>
     `
   }).join("")
+}
+
+function renderCalendarMini(){
+  const container = document.getElementById("calendarMini")
+  if(!container) return
+
+  const today = new Date()
+
+  // geser minggu
+  const start = new Date(today)
+  start.setDate(today.getDate() + currentWeekOffset * 7)
+
+  // mulai dari senin
+  const day = start.getDay()
+  const diff = (day === 0 ? -6 : 1) - day
+  start.setDate(start.getDate() + diff)
+
+  const days = []
+
+  for(let i=0;i<7;i++){
+    const d = new Date(start)
+    d.setDate(start.getDate() + i)
+
+    const dateStr = d.toISOString().split("T")[0]
+
+    const events = videos.filter(v => v.schedule_date === dateStr)
+
+    const avatars = events.map(v => {
+      const ch =
+        Object.entries(channels)
+        .find(([name]) => v.channel && v.channel.includes(name))?.[1] || {}
+
+      return ch.avatar ? `<img src="${ch.avatar}">` : ""
+    }).join("")
+
+    days.push(`
+      <div class="calendar-day">
+        <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
+        <span>${d.getDate()}</span>
+        <div class="calendar-avatars">${avatars}</div>
+      </div>
+    `)
+  }
+
+  container.innerHTML = days.join("")
 }
 
 loadVideos()
