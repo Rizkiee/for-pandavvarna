@@ -774,3 +774,9 @@ box-sizing:border-box;
 .leftTitle{
   text-transform:capitalize;
 }
+
+.meta{
+  font-size:12px;
+  opacity:.7;
+  padding:0 10px 6px;
+}
