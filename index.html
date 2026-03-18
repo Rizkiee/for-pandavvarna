@@ -137,7 +137,11 @@ onclick="goToMember('Yudistira Yogendra')">
 
 <section class="module">
   <h2>Schedule</h2>
-  <div id="calendarMini" class="calendar-mini"></div>
+  <div class="calendar-wrapper">
+  <button onclick="changeWeek(-1)">‹</button>
+  <div id="calendarMini" class="calendar-week"></div>
+  <button onclick="changeWeek(1)">›</button>
+</div>
 </section>
   
 <section class="module">
