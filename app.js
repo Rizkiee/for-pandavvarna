@@ -352,11 +352,9 @@ function renderCalendarMini(){
 
   const today = new Date()
 
-  // geser minggu
   const start = new Date(today)
   start.setDate(today.getDate() + currentWeekOffset * 7)
 
-  // mulai dari senin
   const day = start.getDay()
   const diff = (day === 0 ? -6 : 1) - day
   start.setDate(start.getDate() + diff)
@@ -367,7 +365,11 @@ function renderCalendarMini(){
     const d = new Date(start)
     d.setDate(start.getDate() + i)
 
-    const dateStr = d.toISOString().split("T")[0]
+    // ✅ FIX DATE FORMAT (NO UTC)
+    const dateStr =
+      d.getFullYear() + "-" +
+      String(d.getMonth()+1).padStart(2,"0") + "-" +
+      String(d.getDate()).padStart(2,"0")
 
     const events = videos.filter(v => v.schedule_date === dateStr)
 
