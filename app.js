@@ -370,6 +370,15 @@ function renderCalendarMini(){
   start.setDate(start.getDate() + diff)
 
   const days = []
+  const currentMonth = new Date().getMonth() // ✅ DI LUAR LOOP
+
+for(let i=0;i<7;i++){
+  const d = new Date(start)
+  d.setDate(start.getDate() + i)
+
+  const isToday =
+    d.toDateString() === new Date().toDateString()
+  const isOtherMonth = d.getMonth() !== currentMonth // ✅ DI DALAM LOOP
 
   const monthEl = document.getElementById("calendarMonth")
   if(monthEl){
@@ -414,6 +423,7 @@ const more = extra > 0
 
     days.push(`
       <div class="calendar-day 
+      ${isOtherMonth ? "other-month" : ""}
       ${isToday ? "active" : ""} 
       ${selectedDate === dateStr ? "selected" : ""}"
       onclick="selectDate('${dateStr}', event)">
