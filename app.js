@@ -375,7 +375,7 @@ function renderCalendarMini(){
     const events = videos.filter(v => 
     v.schedule_date && v.schedule_date.trim() === dateStr
   )
-    const max = 3
+    const max = 2
 
 const avatarList = events.map(v => {
   const ch =
