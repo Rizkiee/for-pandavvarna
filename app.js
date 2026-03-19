@@ -372,13 +372,23 @@ function renderCalendarMini(){
 
     const events = videos.filter(v => v.schedule_date === dateStr)
 
-    const avatars = events.map(v => {
-      const ch =
-        Object.entries(channels)
-        .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
+    const max = 3
 
-      return ch.avatar ? `<img src="${ch.avatar}">` : ""
-    }).join("")
+const avatarList = events.map(v => {
+  const ch =
+    Object.entries(channels)
+    .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
+
+  return ch.avatar ? `<img src="${ch.avatar}">` : ""
+})
+
+const avatars = avatarList.slice(0, max).join("")
+
+const extra = events.length - max
+
+const more = extra > 0 
+  ? `<span class="more">+${extra}</span>` 
+  : ""
 
     days.push(`
       <div class="calendar-day">
