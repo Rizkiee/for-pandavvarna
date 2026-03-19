@@ -936,6 +936,10 @@ box-sizing:border-box;
   opacity:.7;
 }
 
+.calendar-day.selected{
+  outline:2px solid #fff;
+}
+
 /*LAYOUT CARD SCHEDULE*/
 .event-info h4{
   font-size:13px;
