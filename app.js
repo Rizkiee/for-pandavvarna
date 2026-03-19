@@ -424,8 +424,30 @@ function renderSelectedEvents(){
     return
   }
 
-  container.innerHTML = events.map(card).join("")
-}
+  container.innerHTML = events.map(v => {
+
+  return `
+  <div class="event-card">
+    
+    <div class="event-time">
+      ${v.time || "--:--"}
+    </div>
+
+    <div class="event-info">
+      <h4>${v.title || ""}</h4>
+      <p>${v.member || ""}</p>
+    </div>
+
+    ${
+      v.url 
+      ? `<a href="${v.url}" target="_blank" class="event-link">▶</a>` 
+      : ""
+    }
+
+  </div>
+  `
+
+}).join("")
 
 function selectDate(date){
   selectedDate = date
