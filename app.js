@@ -370,7 +370,14 @@ function renderCalendarMini(){
   start.setDate(start.getDate() + diff)
 
   const days = []
-  const currentMonth = new Date().getMonth() // ✅ DI LUAR LOOP
+const currentMonth = new Date().getMonth()
+
+// ✅ SET MONTH DI LUAR LOOP
+const monthEl = document.getElementById("calendarMonth")
+if(monthEl){
+  const monthName = start.toLocaleDateString("id-ID", { month:"long", year:"numeric" })
+  monthEl.innerText = monthName
+}
 
 for(let i=0;i<7;i++){
   const d = new Date(start)
@@ -378,66 +385,56 @@ for(let i=0;i<7;i++){
 
   const isToday =
     d.toDateString() === new Date().toDateString()
-  const isOtherMonth = d.getMonth() !== currentMonth // ✅ DI DALAM LOOP
 
-  const monthEl = document.getElementById("calendarMonth")
-  if(monthEl){
-  const monthName = start.toLocaleDateString("id-ID", { month:"long", year:"numeric" })
-  monthEl.innerText = monthName
-  }
-  
-  for(let i=0;i<7;i++){
-  const d = new Date(start)
-  d.setDate(start.getDate() + i)
+  const isOtherMonth =
+    d.getMonth() !== currentMonth
 
-  const isToday =
-    d.toDateString() === new Date().toDateString()
+  const dateStr =
+    d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0")
 
-    // ✅ FIX DATE FORMAT (NO UTC)
-    const dateStr =
-      d.getFullYear() + "-" +
-      String(d.getMonth()+1).padStart(2,"0") + "-" +
-      String(d.getDate()).padStart(2,"0")
-
-    const events = videos.filter(v => 
+  const events = videos.filter(v => 
     v.schedule_date && v.schedule_date.trim() === dateStr
   )
-    
-    const max = 2
-    
-const avatarList = events.map(v => {
-  const ch =
-  Object.entries(channels)
-  .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
 
-  return ch.avatar ? `<img src="${ch.avatar}">` : ""
-})
+  const max = 2
 
-const avatars = avatarList.slice(0, max).join("")
+  const avatarList = events.map(v => {
+    const ch =
+      Object.entries(channels)
+      .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
 
-const extra = events.length - max
+    return ch.avatar ? `<img src="${ch.avatar}">` : ""
+  })
 
-const more = extra > 0 
-  ? `<span class="more">+${extra}</span>` 
-  : ""
+  const avatars = avatarList.slice(0, max).join("")
+  const extra = events.length - max
 
-    days.push(`
-      <div class="calendar-day 
+  const more = extra > 0 
+    ? `<span class="more">+${extra}</span>` 
+    : ""
+
+  days.push(`
+    <div class="calendar-day 
       ${isOtherMonth ? "other-month" : ""}
       ${isToday ? "active" : ""} 
       ${selectedDate === dateStr ? "selected" : ""}"
       onclick="selectDate('${dateStr}', event)">
-        <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
-        <span>${d.getDate()}</span>
-        <div class="calendar-avatars">
+      
+      <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
+      <span>${d.getDate()}</span>
+
+      <div class="calendar-avatars">
         ${avatars}
         ${more}
       </div>
-      </div>
-    `)
-  }
 
-  container.innerHTML = days.join("")
+    </div>
+  `)
+}
+
+container.innerHTML = days.join("")
 }
 
 function renderSelectedEvents(){
