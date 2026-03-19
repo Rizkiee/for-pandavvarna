@@ -931,3 +931,32 @@ box-sizing:border-box;
   font-size:14px;
   opacity:.7;
 }
+
+/*LAYOUT CARD SCHEDULE*/
+.event-info h4{
+  font-size:13px;
+  margin:0;
+
+  display:-webkit-box;
+  -webkit-line-clamp:2; /* 🔥 max 2 baris */
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.event-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#1a1a1d;
+  padding:10px;
+  border-radius:12px;
+  min-width:220px;
+
+  height:60px; /* 🔥 kunci biar rata */
+}
+
+.event-info{
+  flex:1;
+  min-width:0; /* 🔥 penting biar text wrap rapi */
+}
