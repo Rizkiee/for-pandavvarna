@@ -897,3 +897,37 @@ box-sizing:border-box;
   gap:10px;
   overflow-x:auto;
 }
+
+.event-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:#1a1a1d;
+  padding:10px;
+  border-radius:12px;
+  min-width:220px;
+}
+
+.event-time{
+  font-size:12px;
+  opacity:.7;
+  width:50px;
+}
+
+.event-info h4{
+  font-size:13px;
+  margin:0;
+}
+
+.event-info p{
+  font-size:11px;
+  opacity:.6;
+  margin:2px 0 0;
+}
+
+.event-link{
+  text-decoration:none;
+  font-size:14px;
+  opacity:.7;
+}
