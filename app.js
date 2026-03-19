@@ -394,7 +394,10 @@ const more = extra > 0
       <div class="calendar-day">
         <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
         <span>${d.getDate()}</span>
-        <div class="calendar-avatars">${avatars}</div>
+        <div class="calendar-avatars">
+        ${avatars}
+        ${more}
+      </div>
       </div>
     `)
   }
