@@ -3,6 +3,7 @@ const API =
 
 let videos=[]
 let currentWeekOffset = 0
+let selectedDate = null
 
 async function loadVideos(){
   try{
@@ -395,7 +396,8 @@ const more = extra > 0
   : ""
 
     days.push(`
-      <div class="calendar-day ${isToday ? "active" : ""}">
+      <div class="calendar-day ${isToday ? "active" : ""}" 
+      onclick="selectDate('${dateStr}')">
         <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
         <span>${d.getDate()}</span>
         <div class="calendar-avatars">
@@ -407,6 +409,27 @@ const more = extra > 0
   }
 
   container.innerHTML = days.join("")
+}
+
+function renderSelectedEvents(){
+  const container = document.getElementById("selectedDateEvents")
+  if(!container || !selectedDate) return
+
+  const events = videos.filter(v => 
+    v.schedule_date && v.schedule_date.trim() === selectedDate
+  )
+
+  if(events.length === 0){
+    container.innerHTML = `<p style="opacity:.6">No events</p>`
+    return
+  }
+
+  container.innerHTML = events.map(card).join("")
+}
+
+function selectDate(date){
+  selectedDate = date
+  renderSelectedEvents()
 }
 
 loadVideos()
