@@ -44,9 +44,9 @@ async function loadVideos(){
     const titleEl = document.getElementById("categoryTitle")
     if(titleEl) titleEl.innerText = cat
 
-    const filtered = (v => 
-      v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
-    )
+    const filtered = videos.filter(v => 
+  v.type?.trim().toLowerCase() === cat.trim().toLowerCase()
+)
 
     renderCategoryPage(filtered, cat)
   }
@@ -361,10 +361,11 @@ function renderCalendarMini(){
   const days = []
 
   for(let i=0;i<7;i++){
-    const isToday =
+  const d = new Date(start)
+  d.setDate(start.getDate() + i)
+
+  const isToday =
     d.toDateString() === new Date().toDateString()
-    const d = new Date(start)
-    d.setDate(start.getDate() + i)
 
     // ✅ FIX DATE FORMAT (NO UTC)
     const dateStr =
