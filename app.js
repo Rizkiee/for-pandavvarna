@@ -478,6 +478,20 @@ function selectDate(date, e){
   }
 }
 
+/*BUTTON CALENDER*/
+function changeWeek(offset){
+  const today = new Date()
+
+  const current = new Date(today)
+  current.setDate(today.getDate() + (currentWeekOffset + offset) * 7)
+
+  // 🚫 BATAS BULAN
+  if(current.getMonth() !== today.getMonth()) return
+
+  currentWeekOffset += offset
+  renderCalendarMini()
+}
+
 document.addEventListener("click", (e) => {
   const calendar = document.getElementById("calendarMini")
   const events = document.getElementById("selectedDateEvents")
