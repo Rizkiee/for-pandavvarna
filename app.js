@@ -381,8 +381,8 @@ function renderCalendarMini(){
 
 const avatarList = events.map(v => {
   const ch =
-    Object.entries(channels)
-    .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
+  Object.entries(channels)
+  .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
 
   return ch.avatar ? `<img src="${ch.avatar}">` : ""
 })
