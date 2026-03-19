@@ -448,6 +448,7 @@ function renderSelectedEvents(){
   `
 
 }).join("")
+}
 
 function selectDate(date){
   selectedDate = date
