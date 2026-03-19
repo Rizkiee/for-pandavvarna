@@ -361,6 +361,8 @@ function renderCalendarMini(){
   const days = []
 
   for(let i=0;i<7;i++){
+    const isToday =
+    d.toDateString() === new Date().toDateString()
     const d = new Date(start)
     d.setDate(start.getDate() + i)
 
@@ -370,8 +372,9 @@ function renderCalendarMini(){
       String(d.getMonth()+1).padStart(2,"0") + "-" +
       String(d.getDate()).padStart(2,"0")
 
-    const events = videos.filter(v => v.schedule_date === dateStr)
-
+    const events = videos.filter(v => 
+    v.schedule_date && v.schedule_date.trim() === dateStr
+  )
     const max = 3
 
 const avatarList = events.map(v => {
@@ -391,7 +394,7 @@ const more = extra > 0
   : ""
 
     days.push(`
-      <div class="calendar-day">
+      <div class="calendar-day ${isToday ? "active" : ""}">
         <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
         <span>${d.getDate()}</span>
         <div class="calendar-avatars">
