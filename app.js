@@ -435,7 +435,8 @@ function renderSelectedEvents(){
 
     <div class="event-info">
       <h4>${v.title || ""}</h4>
-      <p>${v.member || ""}</p>
+      <p>${v.member || ""}
+      </p>
     </div>
 
     ${
@@ -448,7 +449,8 @@ function renderSelectedEvents(){
   `
 
 }).join("")
-}
+
+} // ✅ INI YANG KAMU KURANGIN
 
 function selectDate(date){
   selectedDate = date
