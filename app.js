@@ -387,8 +387,14 @@ function renderCalendarMini(){
     const events = videos.filter(v => 
     v.schedule_date && v.schedule_date.trim() === dateStr
   )
+const monthEl = document.getElementById("calendarMonth")
+if(monthEl){
+  const monthName = start.toLocaleDateString("id-ID", { month:"long", year:"numeric" })
+  monthEl.innerText = monthName
+}
+    
     const max = 2
-
+    
 const avatarList = events.map(v => {
   const ch =
   Object.entries(channels)
