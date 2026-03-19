@@ -419,7 +419,7 @@ for(let i=0;i<7;i++){
     <div class="calendar-day 
       ${isOtherMonth ? "other-month" : ""}
       ${isToday ? "active" : ""} 
-      ${selectedDate === dateStr ? "selected" : ""}"
+      ${selectedDate === dateStr ? "selected" : ""}
       onclick="selectDate('${dateStr}', event)">
       
       <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
