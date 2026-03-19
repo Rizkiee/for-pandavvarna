@@ -890,3 +890,10 @@ box-sizing:border-box;
   flex-direction:column;
   align-items:center;
 }
+
+.selected-events{
+  margin:15px 0;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+}
