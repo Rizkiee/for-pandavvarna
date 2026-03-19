@@ -11,8 +11,18 @@ async function loadVideos(){
     const data = await res.json()
 
     videos = data
+    const today = new Date()
+    const todayStr =
+    today.getFullYear() + "-" +
+    String(today.getMonth()+1).padStart(2,"0") + "-" +
+    String(today.getDate()).padStart(2,"0")
+
+    selectedDate = todayStr
+    
     if(document.getElementById("calendarMini"))
     renderCalendarMini()
+
+    renderSelectedEvents()
     
     if(document.getElementById("upcomingGrid"))
     renderUpcoming()
@@ -457,6 +467,16 @@ function renderSelectedEvents(){
 function selectDate(date){
   selectedDate = date
   renderSelectedEvents()
+}
+
+function selectDate(date){
+  selectedDate = date
+  renderSelectedEvents()
+
+  const el = document.getElementById("selectedDateEvents")
+  if(el){
+    el.scrollIntoView({ behavior:"smooth", block:"nearest" })
+  }
 }
 
 loadVideos()
