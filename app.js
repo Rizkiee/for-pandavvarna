@@ -466,11 +466,8 @@ function renderSelectedEvents(){
 
 function selectDate(date){
   selectedDate = date
-  renderSelectedEvents()
-}
 
-function selectDate(date){
-  selectedDate = date
+  renderCalendarMini()     // 🔥 ini yang kurang
   renderSelectedEvents()
 
   const el = document.getElementById("selectedDateEvents")
@@ -478,5 +475,22 @@ function selectDate(date){
     el.scrollIntoView({ behavior:"smooth", block:"nearest" })
   }
 }
+
+document.addEventListener("click", (e) => {
+  const calendar = document.getElementById("calendarMini")
+  const events = document.getElementById("selectedDateEvents")
+
+  if(!calendar || !events) return
+
+  // kalau klik di luar calendar & event
+  if(
+    !calendar.contains(e.target) &&
+    !events.contains(e.target)
+  ){
+    selectedDate = null
+    events.innerHTML = ""
+    renderCalendarMini() // reset highlight
+  }
+})
 
 loadVideos()
