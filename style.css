@@ -872,3 +872,11 @@ box-sizing:border-box;
   height:20px;
   border-radius:50%;
 }
+
+.more{
+  font-size:10px;
+  background:#2a2a30;
+  padding:2px 5px;
+  border-radius:6px;
+  margin-left:4px;
+}
