@@ -371,6 +371,12 @@ function renderCalendarMini(){
 
   const days = []
 
+  const monthEl = document.getElementById("calendarMonth")
+  if(monthEl){
+  const monthName = start.toLocaleDateString("id-ID", { month:"long", year:"numeric" })
+  monthEl.innerText = monthName
+  }
+  
   for(let i=0;i<7;i++){
   const d = new Date(start)
   d.setDate(start.getDate() + i)
@@ -387,11 +393,6 @@ function renderCalendarMini(){
     const events = videos.filter(v => 
     v.schedule_date && v.schedule_date.trim() === dateStr
   )
-const monthEl = document.getElementById("calendarMonth")
-if(monthEl){
-  const monthName = start.toLocaleDateString("id-ID", { month:"long", year:"numeric" })
-  monthEl.innerText = monthName
-}
     
     const max = 2
     
@@ -501,17 +502,16 @@ function changeWeek(offset){
 document.addEventListener("click", (e) => {
   const calendar = document.getElementById("calendarMini")
   const events = document.getElementById("selectedDateEvents")
+  const wrapper = document.querySelector(".calendar-wrapper") // 🔥 TAMBAHAN
 
-  if(!calendar || !events) return
+  if(!calendar || !events || !wrapper) return
 
-  // kalau klik di luar calendar & event
   if(
-    !calendar.contains(e.target) &&
-    !events.contains(e.target)
+    !wrapper.contains(e.target) // 🔥 ganti ke wrapper
   ){
     selectedDate = null
     events.innerHTML = ""
-    renderCalendarMini() // reset highlight
+    renderCalendarMini()
   }
 })
 
