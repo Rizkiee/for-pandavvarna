@@ -976,6 +976,12 @@ box-sizing:border-box;
   opacity:0.4;
 }
 
-.other-month{
-  opacity:0.4;
+/* HIDE SCROLLBAR tapi tetap bisa scroll */
+.calendar-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-wrapper {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
 }
