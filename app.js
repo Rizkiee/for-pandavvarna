@@ -418,11 +418,7 @@ for(let i=0;i<7;i++){
     : ""
 
   days.push(`
-  <div class="calendar-day 
-    ${isOtherMonth ? "other-month" : ""}
-    ${isToday ? "active" : ""} 
-    ${selectedDate === dateStr ? "selected" : ""}"
-    onclick="selectDate('${dateStr}', event)">
+  <div class="calendar-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "active" : ""} ${selectedDate === dateStr ? "selected" : ""}" onclick="selectDate('${dateStr}', event)">
       
       <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
       <span>${d.getDate()}</span>
@@ -434,19 +430,18 @@ for(let i=0;i<7;i++){
 
     </div>
   `)
-
-  if(prevBtn){
-  prevBtn.disabled = currentWeekOffset <= minWeekOffset
-    }
-
-  if(nextBtn){
-  nextBtn.disabled = currentWeekOffset >= maxWeekOffset
-  }
   }
 
   container.innerHTML = days.join("")
   const prevBtn = document.querySelector(".calendar-wrapper button:first-child")
   const nextBtn = document.querySelector(".calendar-wrapper button:last-child")
+  if(prevBtn){
+  prevBtn.disabled = currentWeekOffset <= minWeekOffset
+  }
+
+if(nextBtn){
+  nextBtn.disabled = currentWeekOffset >= maxWeekOffset
+  }
 }
 
 function renderSelectedEvents(){
