@@ -985,3 +985,22 @@ box-sizing:border-box;
   -ms-overflow-style: none;  /* IE & Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+.calendar-mini::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-mini {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.calendar-mini,
+.selected-events {
+  scrollbar-width: none;
+}
+
+.calendar-mini::-webkit-scrollbar,
+.selected-events::-webkit-scrollbar {
+  display: none;
+}
