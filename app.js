@@ -430,13 +430,15 @@ const days = week.map(d => {
   )
 
   const avatars = events.slice(0,2).map(v => {
-  const ch =
-    Object.entries(channels)
-    .find(([name]) => v.channel && v.channel.includes(name))?.[1]
 
-  return ch?.avatar 
-    ? `<img src="${ch.avatar}">` 
+  const ch = Object.entries(channels).find(([name]) =>
+    v.member?.toLowerCase().trim().includes(name.toLowerCase().trim())
+  )?.[1]
+
+  return ch?.avatar
+    ? `<img src="${ch.avatar}">`
     : ""
+
   }).join("")
 
   const more = events.length > 2
