@@ -524,33 +524,6 @@ function selectDate(date){
 
 /*BUTTON CALENDER*/
 function changeWeek(offset){
-  const next = currentWeekOffset + offset
-
-  // 🚫 batas
-  if(next < minWeekOffset || next > maxWeekOffset) return
-
-  const container = document.getElementById("calendarMini")
-
-  // ✨ animasi keluar
-  if(container){
-    container.style.opacity = 0
-    container.style.transform = `translateX(${offset > 0 ? "-20px" : "20px"})`
-  }
-
-  setTimeout(()=>{
-    currentWeekOffset = next
-    renderCalendarMini()
-
-    // ✨ animasi masuk
-    if(container){
-      container.style.opacity = 1
-      container.style.transform = "translateX(0)"
-    }
-
-  },150)
-}
-
-function changeWeek(offset){
   const next = weekIndex + offset
 
   if(next < 0 || next >= weeks.length) return
@@ -560,14 +533,13 @@ function changeWeek(offset){
 }
 
 document.addEventListener("click", (e) => {
-  const calendar = document.getElementById("calendarMini")
   const events = document.getElementById("selectedDateEvents")
-  const wrapper = document.querySelector(".calendar-wrapper") // 🔥 TAMBAHAN
 
-  if(!calendar || !events || !wrapper) return
+  if(!events) return
 
   if(
-    !wrapper.contains(e.target) // 🔥 ganti ke wrapper
+    !e.target.closest(".calendar-day") &&
+    !e.target.closest(".event-card")
   ){
     selectedDate = null
     events.innerHTML = ""
