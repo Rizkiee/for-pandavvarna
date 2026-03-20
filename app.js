@@ -430,16 +430,18 @@ const days = week.map(d => {
   )
 
   const avatars = events.slice(0,2).map(v => {
-    const ch =
-      Object.entries(channels)
-      .find(([name]) => v.channel && v.channel.includes(name))?.[1] || {}
+  const ch =
+    Object.entries(channels)
+    .find(([name]) => v.channel && v.channel.includes(name))?.[1]
 
-    return ch.avatar ? `<img src="${ch.avatar}">` : ""
+  return ch?.avatar 
+    ? `<img src="${ch.avatar}">` 
+    : ""
   }).join("")
 
   const more = events.length > 2
-    ? `<span class="more">+${events.length - 2}</span>`
-    : ""
+  ? `<span class="more">+${events.length - 2}</span>`
+  : ""
 
   return `
   <div class="calendar-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "active" : ""} ${selectedDate === dateStr ? "selected" : ""}"
