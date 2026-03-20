@@ -6,6 +6,9 @@ let currentWeekOffset = 0
 let selectedDate = null
 let minWeekOffset = -1
 let maxWeekOffset = 1
+let currentDate = new Date()
+let weekIndex = 0
+let weeks = []
 
 async function loadVideos(){
   try{
@@ -13,6 +16,7 @@ async function loadVideos(){
     const data = await res.json()
 
     videos = data
+    generateWeeks()
     const today = new Date()
     const todayStr =
     today.getFullYear() + "-" +
@@ -357,33 +361,63 @@ function handleMemberPage(){
   }
 }
 
-/*SCHEDULE*/
-function renderCalendarMini(){
-  const container = document.getElementById("calendarMini")
-  if(!container) return
+function generateWeeks(){
+  const base = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 
-  const today = new Date()
-
-  const start = new Date(today)
-  start.setDate(today.getDate() + currentWeekOffset * 7)
-
+  // cari senin pertama sebelum/di bulan ini
+  const start = new Date(base)
   const day = start.getDay()
   const diff = (day === 0 ? -6 : 1) - day
   start.setDate(start.getDate() + diff)
 
-  const days = []
-const currentMonth = new Date().getMonth()
+  weeks = []
 
-// ✅ SET MONTH DI LUAR LOOP
-const monthEl = document.getElementById("calendarMonth")
-if(monthEl){
-  const monthName = start.toLocaleDateString("id-ID", { month:"long", year:"numeric" })
-  monthEl.innerText = monthName
+  for(let w=0; w<6; w++){
+    const week = []
+
+    for(let d=0; d<7; d++){
+      const date = new Date(start)
+      date.setDate(start.getDate() + w*7 + d)
+      week.push(date)
+    }
+
+    weeks.push(week)
+  }
+
+  // 👉 default: cari minggu yang ada hari ini
+  const todayStr = new Date().toDateString()
+
+  const foundIndex = weeks.findIndex(week =>
+    week.some(d => d.toDateString() === todayStr)
+  )
+
+  weekIndex = foundIndex !== -1 ? foundIndex : 0
 }
 
-for(let i=0;i<7;i++){
-  const d = new Date(start)
-  d.setDate(start.getDate() + i)
+/*SCHEDULE*/
+function renderCalendarMini(){
+  const container = document.getElementById("calendarMini")
+if(!container) return
+
+const week = weeks[weekIndex]
+
+const currentMonth = currentDate.getMonth()
+
+// 🔥 SET BULAN
+const monthEl = document.getElementById("calendarMonth")
+if(monthEl){
+  monthEl.innerText = currentDate.toLocaleDateString("id-ID", {
+    month:"long",
+    year:"numeric"
+  })
+}
+
+const days = week.map(d => {
+
+  const dateStr =
+    d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0")
 
   const isToday =
     d.toDateString() === new Date().toDateString()
@@ -391,48 +425,39 @@ for(let i=0;i<7;i++){
   const isOtherMonth =
     d.getMonth() !== currentMonth
 
-  const dateStr =
-    d.getFullYear() + "-" +
-    String(d.getMonth()+1).padStart(2,"0") + "-" +
-    String(d.getDate()).padStart(2,"0")
-
-  const events = videos.filter(v => 
+  const events = videos.filter(v =>
     v.schedule_date && v.schedule_date.trim() === dateStr
   )
 
-  const max = 2
-
-  const avatarList = events.map(v => {
+  const avatars = events.slice(0,2).map(v => {
     const ch =
       Object.entries(channels)
       .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
 
     return ch.avatar ? `<img src="${ch.avatar}">` : ""
-  })
+  }).join("")
 
-  const avatars = avatarList.slice(0, max).join("")
-  const extra = events.length - max
-
-  const more = extra > 0 
-    ? `<span class="more">+${extra}</span>` 
+  const more = events.length > 2
+    ? `<span class="more">+${events.length - 2}</span>`
     : ""
 
-  days.push(`
-  <div class="calendar-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "active" : ""} ${selectedDate === dateStr ? "selected" : ""}" onclick="selectDate('${dateStr}')">
-      
-      <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
-      <span>${d.getDate()}</span>
+  return `
+  <div class="calendar-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "active" : ""} ${selectedDate === dateStr ? "selected" : ""}"
+       onclick="selectDate('${dateStr}')">
 
-      <div class="calendar-avatars">
-        ${avatars}
-        ${more}
-      </div>
+    <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
+    <span>${d.getDate()}</span>
 
+    <div class="calendar-avatars">
+      ${avatars}
+      ${more}
     </div>
-  `)
-  }
 
-  container.innerHTML = days.join("")
+  </div>
+  `
+})
+
+container.innerHTML = days.join("")
   const prevBtn = document.querySelector(".calendar-wrapper button:first-child")
   const nextBtn = document.querySelector(".calendar-wrapper button:last-child")
   if(prevBtn){
@@ -523,6 +548,15 @@ function changeWeek(offset){
     }
 
   },150)
+}
+
+function changeWeek(offset){
+  const next = weekIndex + offset
+
+  if(next < 0 || next >= weeks.length) return
+
+  weekIndex = next
+  renderCalendarMini()
 }
 
 document.addEventListener("click", (e) => {
