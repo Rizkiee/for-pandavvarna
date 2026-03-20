@@ -968,3 +968,16 @@ box-sizing:border-box;
   flex:1;
   min-width:0; /* 🔥 penting biar text wrap rapi */
 }
+
+.calendar-wrapper button:disabled{
+  opacity:0.3;
+  cursor:not-allowed;
+}
+
+.other-month{
+  opacity:0.4;
+}
+
+.other-month{
+  opacity:0.4;
+}
