@@ -388,6 +388,7 @@ for(let i=0;i<7;i++){
 
   const isOtherMonth =
     d.getMonth() !== currentMonth
+  ${isOtherMonth ? "other-month" : ""}
 
   const dateStr =
     d.getFullYear() + "-" +
@@ -432,9 +433,19 @@ for(let i=0;i<7;i++){
 
     </div>
   `)
-}
+  const prevBtn = document.querySelector(".calendar-wrapper button:first-child")
+  const nextBtn = document.querySelector(".calendar-wrapper button:last-child")
 
-container.innerHTML = days.join("")
+  if(prevBtn){
+  prevBtn.disabled = currentWeekOffset <= minWeekOffset
+    }
+
+  if(nextBtn){
+  nextBtn.disabled = currentWeekOffset >= maxWeekOffset
+  }
+  }
+
+  container.innerHTML = days.join("")
 }
 
 function renderSelectedEvents(){
@@ -494,16 +505,30 @@ function selectDate(date, e){
 
 /*BUTTON CALENDER*/
 function changeWeek(offset){
-  const today = new Date()
+  const next = currentWeekOffset + offset
 
-  const current = new Date(today)
-  current.setDate(today.getDate() + (currentWeekOffset + offset) * 7)
+  // 🚫 batas
+  if(next < minWeekOffset || next > maxWeekOffset) return
 
-  // 🚫 BATAS BULAN
-  if(current.getMonth() !== today.getMonth()) return
+  const container = document.getElementById("calendarMini")
 
-  currentWeekOffset += offset
-  renderCalendarMini()
+  // ✨ animasi keluar
+  if(container){
+    container.style.opacity = 0
+    container.style.transform = `translateX(${offset > 0 ? "-20px" : "20px"})`
+  }
+
+  setTimeout(()=>{
+    currentWeekOffset = next
+    renderCalendarMini()
+
+    // ✨ animasi masuk
+    if(container){
+      container.style.opacity = 1
+      container.style.transform = "translateX(0)"
+    }
+
+  },150)
 }
 
 document.addEventListener("click", (e) => {
