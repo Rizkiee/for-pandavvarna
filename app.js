@@ -432,7 +432,7 @@ const days = week.map(d => {
   const avatars = events.slice(0,2).map(v => {
     const ch =
       Object.entries(channels)
-      .find(([name]) => v.member && v.member.includes(name))?.[1] || {}
+      .find(([name]) => v.channel && v.channel.includes(name))?.[1] || {}
 
     return ch.avatar ? `<img src="${ch.avatar}">` : ""
   }).join("")
@@ -540,8 +540,8 @@ document.addEventListener("click", (e) => {
   if(!events) return
 
   if(
-    !e.target.closest(".calendar-day") &&
-    !e.target.closest(".event-card")
+  !e.target.closest("#calendarMini") &&
+  !e.target.closest("#selectedDateEvents")
   ){
     selectedDate = null
     events.innerHTML = ""
