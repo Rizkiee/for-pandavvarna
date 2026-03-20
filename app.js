@@ -431,13 +431,15 @@ const days = week.map(d => {
 
   const avatars = events.slice(0,2).map(v => {
 
-  const ch = Object.entries(channels).find(([name]) =>
-    v.member?.toLowerCase().trim().includes(name.toLowerCase().trim())
-  )?.[1]
+  const name = v.member?.toLowerCase().trim()
 
-  return ch?.avatar
-    ? `<img src="${ch.avatar}">`
-    : ""
+  const foundKey = Object.keys(channels).find(key =>
+    name && name.includes(key.toLowerCase())
+  )
+
+  return foundKey
+    ? `<img src="${channels[foundKey].avatar}">`
+    : `<div style="width:20px;height:20px;background:red;border-radius:50%"></div>`
 
   }).join("")
 
