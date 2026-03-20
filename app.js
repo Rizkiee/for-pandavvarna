@@ -4,6 +4,8 @@ const API =
 let videos=[]
 let currentWeekOffset = 0
 let selectedDate = null
+let minWeekOffset = -1
+let maxWeekOffset = 1
 
 async function loadVideos(){
   try{
@@ -388,7 +390,6 @@ for(let i=0;i<7;i++){
 
   const isOtherMonth =
     d.getMonth() !== currentMonth
-  ${isOtherMonth ? "other-month" : ""}
 
   const dateStr =
     d.getFullYear() + "-" +
@@ -417,11 +418,11 @@ for(let i=0;i<7;i++){
     : ""
 
   days.push(`
-    <div class="calendar-day 
-      ${isOtherMonth ? "other-month" : ""}
-      ${isToday ? "active" : ""} 
-      ${selectedDate === dateStr ? "selected" : ""}
-      onclick="selectDate('${dateStr}', event)">
+  <div class="calendar-day 
+    ${isOtherMonth ? "other-month" : ""}
+    ${isToday ? "active" : ""} 
+    ${selectedDate === dateStr ? "selected" : ""}"
+    onclick="selectDate('${dateStr}', event)">
       
       <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
       <span>${d.getDate()}</span>
@@ -433,8 +434,6 @@ for(let i=0;i<7;i++){
 
     </div>
   `)
-  const prevBtn = document.querySelector(".calendar-wrapper button:first-child")
-  const nextBtn = document.querySelector(".calendar-wrapper button:last-child")
 
   if(prevBtn){
   prevBtn.disabled = currentWeekOffset <= minWeekOffset
@@ -446,6 +445,8 @@ for(let i=0;i<7;i++){
   }
 
   container.innerHTML = days.join("")
+  const prevBtn = document.querySelector(".calendar-wrapper button:first-child")
+  const nextBtn = document.querySelector(".calendar-wrapper button:last-child")
 }
 
 function renderSelectedEvents(){
