@@ -443,7 +443,7 @@ const days = week.map(d => {
 
   return `
   <div class="calendar-day ${isOtherMonth ? "other-month" : ""} ${isToday ? "active" : ""} ${selectedDate === dateStr ? "selected" : ""}"
-       onclick="selectDate(evemt, '${dateStr}')">
+       onclick="selectDate(event, '${dateStr}')">
 
     <h4>${d.toLocaleDateString("id-ID",{weekday:"short"})}</h4>
     <span>${d.getDate()}</span>
@@ -510,8 +510,9 @@ function renderSelectedEvents(){
 
 } // ✅ INI YANG KAMU KURANGIN
 
-function selectDate(date){
+function selectDate(e, date){
   e.stopPropagation()
+
   selectedDate = date
 
   renderCalendarMini()
