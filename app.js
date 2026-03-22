@@ -555,4 +555,46 @@ document.addEventListener("click", (e) => {
   }
 })
 
+/*HIGHLIGHT*/
+function getHighlights(){
+  const groups = {}
+
+  videos.forEach(v => {
+    if(!v.highlight) return
+
+    if(!groups[v.highlight]){
+      groups[v.highlight] = []
+    }
+
+    groups[v.highlight].push(v)
+  })
+
+  return groups
+}
+
+function renderHighlights(){
+  const container = document.getElementById("highlightCarousel")
+  if(!container) return
+
+  const groups = getHighlights()
+
+  container.innerHTML = Object.keys(groups).map(key => {
+
+    const vids = groups[key]
+
+    const first = vids[0] // ambil thumbnail pertama
+
+    const id = getVideoId(first.url)
+    const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+
+    return `
+      <div class="highlight-card">
+        <img src="${thumb}">
+        <h3>${key.toUpperCase()}</h3>
+        <p>${vids.length} videos</p>
+      </div>
+    `
+  }).join("")
+}
+
 loadVideos()
