@@ -24,6 +24,8 @@ async function loadVideos(){
     String(today.getDate()).padStart(2,"0")
 
     selectedDate = todayStr
+    if(document.getElementById("highlightCarousel"))
+    renderHighlights()
     
     if(document.getElementById("calendarMini"))
     renderCalendarMini()
@@ -560,13 +562,14 @@ function getHighlights(){
   const groups = {}
 
   videos.forEach(v => {
-    if(!v.highlight) return
+    const key = v.highlight?.toLowerCase().trim()
+    if(!key) return
 
-    if(!groups[v.highlight]){
-      groups[v.highlight] = []
+    if(!groups[key]){
+      groups[key] = []
     }
 
-    groups[v.highlight].push(v)
+    groups[key].push(v)
   })
 
   return groups
@@ -581,20 +584,23 @@ function renderHighlights(){
   container.innerHTML = Object.keys(groups).map(key => {
 
     const vids = groups[key]
-
-    const first = vids[0] // ambil thumbnail pertama
+    const first = vids[0]
 
     const id = getVideoId(first.url)
-    const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+    const thumb = id
+      ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+      : ""
 
     return `
       <div class="highlight-card">
-        <img src="${thumb}">
-        <h3>${key.toUpperCase()}</h3>
+        ${thumb ? `<img src="${thumb}">` : ""}
+        <h3>${key}</h3>
         <p>${vids.length} videos</p>
       </div>
     `
   }).join("")
 }
+
+console.log("HIGHLIGHTS:", getHighlights())
 
 loadVideos()
